@@ -1,6 +1,5 @@
 package com.rox.omi.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,20 +8,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.rox.omi.dto.Payload;
-import com.rox.omi.services.ConfigService;
 
 import reactor.core.publisher.Flux;
 
 @Controller
 public class OmiController {
 
-	@Autowired
-	ConfigService configService;
-
 	private final WebClient webClient;
 
 	public OmiController() {
-		this.webClient = WebClient.builder().baseUrl(configService.getOllamaUrl())
+		this.webClient = WebClient.builder().baseUrl("http://localhost:11434")
 				.defaultHeader("Content-Type", "application/json").build();
 	}
 
