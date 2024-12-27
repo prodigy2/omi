@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConfigService {
 
-    @Value("${ollama.url}")
-    private String ollamaUrl;
+	@Value("${ollama.url}")
+	private String ollamaUrl;
 
-    public String getOllamaUrl() {
-        return ollamaUrl;
-    }
+	public String getOllamaUrl() {
+		return ollamaUrl;
+	}
 }

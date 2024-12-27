@@ -13,41 +13,31 @@ import com.rox.omi.services.ConfigService;
 
 import reactor.core.publisher.Flux;
 
-
 @Controller
 public class OmiController {
 
+	@Autowired
+	ConfigService configService;
 
-@Autowired
-ConfigService configService;
-	
-    private final WebClient webClient;
+	private final WebClient webClient;
 
-    public OmiController() {
-        this.webClient = WebClient.builder()
-            .baseUrl(configService.getOllamaUrl())
-            .defaultHeader("Content-Type", "application/json")
-            .build();
-    }
+	public OmiController() {
+		this.webClient = WebClient.builder().baseUrl(configService.getOllamaUrl())
+				.defaultHeader("Content-Type", "application/json").build();
+	}
 
-   
+	@PostMapping(value = "/streamResponse", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@ResponseBody
+	public Flux<String> streamResponse(@RequestBody Payload payload) {
+		System.out.println("Received payload: " + payload.getPrompt());
+		return callOllamaApi(payload.getPrompt());
+	}
 
-    @PostMapping(value = "/streamResponse", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    @ResponseBody
-    public Flux<String> streamResponse(@RequestBody Payload payload) {
-        System.out.println("Received payload: " + payload.getPrompt());
-        return callOllamaApi(payload.getPrompt());
-    }
+	private Flux<String> callOllamaApi(String promptText) {
+		String apiUrl = "/api/generate";
+		String requestBody = String.format("{\"model\": \"llama3\", \"prompt\": \"%s\", \"stream\": true}", promptText);
 
-    private Flux<String> callOllamaApi(String promptText) {
-        String apiUrl = "/api/generate";
-        String requestBody = String.format("{\"model\": \"llama3\", \"prompt\": \"%s\", \"stream\": true}", promptText);
-
-        return this.webClient.post()
-            .uri(apiUrl)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValue(requestBody)
-            .retrieve()
-            .bodyToFlux(String.class);
-    }
+		return this.webClient.post().uri(apiUrl).contentType(MediaType.APPLICATION_JSON).bodyValue(requestBody)
+				.retrieve().bodyToFlux(String.class);
+	}
 }

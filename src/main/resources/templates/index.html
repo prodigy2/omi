@@ -1,83 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ollama minimal interface</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #0f0;
-            font-family: monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ollama minimal interface</title>
+<style>
+body {
+	background-color: #000;
+	color: #0f0;
+	font-family: monospace;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
 
-        #chatContainer {
-            width: 60%;
-            max-width: 800px;
-            min-width: 300px;
-            border: 1px solid #0f0;
-            border-radius: 10px;
-            padding: 20px;
-            background-color: #111;
-        }
+#chatContainer {
+	width: 60%;
+	max-width: 800px;
+	min-width: 300px;
+	border: 1px solid #0f0;
+	border-radius: 10px;
+	padding: 20px;
+	background-color: #111;
+}
 
-        textarea {
-            width: 100%;
-            border: 1px solid #0f0;
-            border-radius: 8px;
-            background-color: #000;
-            color: #0f0;
-            font-family: monospace;
-            resize: none;
-            padding: 10px;
-            box-sizing: border-box;
-        }
+textarea {
+	width: 100%;
+	border: 1px solid #0f0;
+	border-radius: 8px;
+	background-color: #000;
+	color: #0f0;
+	font-family: monospace;
+	resize: none;
+	padding: 10px;
+	box-sizing: border-box;
+}
 
-        #promptInput {
-            height: 50px;
-            margin-bottom: 10px;
-        }
+#promptInput {
+	height: 50px;
+	margin-bottom: 10px;
+}
 
-        #chatHistory {
-            height: 300px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #0f0;
-            border-radius: 8px;
-            background-color: #000;
-            color: #0f0;
-        }
+#chatHistory {
+	height: 300px;
+	overflow-y: auto;
+	white-space: pre-wrap;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #0f0;
+	border-radius: 8px;
+	background-color: #000;
+	color: #0f0;
+}
 
-        button {
-            padding: 10px 20px;
-            background-color: #0f0;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+button {
+	padding: 10px 20px;
+	background-color: #0f0;
+	color: #000;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+}
 
-        button:hover {
-            background-color: #090;
-        }
-    </style>
+button:hover {
+	background-color: #090;
+}
+</style>
 </head>
 <body>
-    <div id="chatContainer">
-        <h1>DocGuru</h1>
-        <div id="chatHistory"></div>
-        <textarea id="promptInput" rows="2" placeholder="Type your prompt here..."></textarea>
-        <button id="sendPromptButton">Send Prompt</button>
-    </div>
+	<div id="chatContainer">
+		<h1>DocGuru</h1>
+		<div id="chatHistory"></div>
+		<textarea id="promptInput" rows="2"
+			placeholder="Type your prompt here..."></textarea>
+		<button id="sendPromptButton">Send Prompt</button>
+	</div>
 
-    <script>
+	<script>
         document.addEventListener("DOMContentLoaded", function () {
             const promptInput = document.getElementById('promptInput');
             const sendPromptButton = document.getElementById('sendPromptButton');

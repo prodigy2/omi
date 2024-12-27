@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OmiApp {
 
-    public static void main(String[] args) {
-        SpringApplication.run(OmiApp.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(OmiApp.class, args);
+	}
 }

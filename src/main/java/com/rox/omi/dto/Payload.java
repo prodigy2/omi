@@ -1,7 +1,7 @@
 package com.rox.omi.dto;
 
 public class Payload {
-    private String prompt;
+	private String prompt;
 
 	public String getPrompt() {
 		return prompt;
